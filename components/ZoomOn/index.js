@@ -1,62 +1,57 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import styled, { createGlobalStyle } from 'styled-components';
-import { CloseOutlined } from '@ant-design/icons';
-
-const Global = createGlobalStyle`
-.slick-slide{
-    display : inline-block;
-}
-`;
+import {
+	AllWrapper,
+	Header,
+	XButton,
+	Global,
+	SliderWrapper,
+	ImageWrapper,
+	PagesWrapper,
+} from './styles';
 
 const ZoomOn = ({ images, zoomOff }) => {
+	const [page, setPage] = useState(0);
+	const buttonRef = useRef();
+
+	useEffect(() => {
+		buttonRef.current.focus();
+	}, []);
+
+	const handleOnFocus = useCallback((e) => {
+		buttonRef.current.focus();
+	}, []);
+
+	const handleOnClose = useCallback((e) => {
+		if (e.key === 'Escape') {
+			return zoomOff();
+		}
+	}, []);
+
 	return (
-		<div
-			style={{
-				position: 'fixed',
-				left: 0,
-				top: 0,
-				bottom: 0,
-				right: 0,
-				zIndex: 1000,
-				textAlign: 'center',
-			}}>
-			<header
-				style={{
-					backgroundColor: 'white',
-					width: '100%',
-					height: '50px',
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					fontSize: '24px',
-				}}>
+		<AllWrapper onClick={handleOnFocus}>
+			<Header>
 				<div>상세 이미지</div>
-				<CloseOutlined
-					onClick={zoomOff}
-					style={{
-						position: 'absolute',
-						right: '2vw',
-						cursor: 'pointer',
-					}}
-				/>
-			</header>
+				<XButton onKeyDown={handleOnClose} ref={buttonRef} onClick={zoomOff} />
+			</Header>
 			<Global />
-			<div style={{ backgroundColor: 'gray', height: '1000px' }}>
+			<SliderWrapper>
 				<Slider
 					infinite={true}
 					slidesToScroll={1}
 					slidesToShow={1}
+					beforeChange={(current, next) => setPage(next)}
 					arrows={false}>
 					{images.map((v, i) => (
-						<div>
-							<img key={i} src={v.src} />
+						<div key={i}>
+							<ImageWrapper style={{ userSelect: 'none' }} src={v.src} />
 						</div>
 					))}
 				</Slider>
-			</div>
-		</div>
+				<PagesWrapper>{`${page + 1} / ${images.length}`}</PagesWrapper>
+			</SliderWrapper>
+		</AllWrapper>
 	);
 };
 
