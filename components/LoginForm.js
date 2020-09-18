@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
+import { LoginAction } from '../reducers/user';
+import { useDispatch } from 'react-redux';
 
 const FormWrapper = styled(Form)`
 	padding: 10px;
@@ -14,7 +16,8 @@ const ButtonWrapper = styled(Button)`
 	margin-left: 5px;
 `;
 
-const LoginForm = ({ setIsLogged }) => {
+const LoginForm = () => {
+	const dispatch = useDispatch();
 	const [id, setId] = useState('');
 	const [password, setPassword] = useState('');
 	const onChangeId = useCallback((e) => {
@@ -26,7 +29,7 @@ const LoginForm = ({ setIsLogged }) => {
 
 	const onSubmitForm = useCallback(() => {
 		console.log(id, password);
-		setIsLogged(true);
+		dispatch(LoginAction({ id, password }));
 	}, [id, password]);
 
 	return (

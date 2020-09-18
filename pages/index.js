@@ -9,7 +9,10 @@ const Home = () => {
 			<Head>
 				<title>Home</title>
 			</Head>
-			<AppLayout>Home!!</AppLayout>
+			<AppLayout>
+				<PostForm />
+				<PostCard />
+			</AppLayout>
 		</>
 	);
 };

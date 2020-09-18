@@ -10,13 +10,14 @@ import {
 import styled from 'styled-components';
 import UserProfile from './UserProfile';
 import LoginForm from './LoginForm';
+import { useSelector } from 'react-redux';
 
 const InputWrapper = styled(Input.Search)`
 	vertical-align: middle;
 `;
 
 const AppLayout = ({ children }) => {
-	const [isLogged, setIsLogged] = useState(false);
+	const { isLogged } = useSelector((state) => state.user);
 	return (
 		<>
 			<Menu mode="horizontal">
@@ -44,11 +45,7 @@ const AppLayout = ({ children }) => {
 			</Menu>
 			<Row gutter={10}>
 				<Col xs={24} sm={24} md={6} lg={6} xl={6} xxl={6}>
-					{isLogged ? (
-						<UserProfile setIsLogged={setIsLogged} />
-					) : (
-						<LoginForm setIsLogged={setIsLogged} />
-					)}
+					{isLogged ? <UserProfile /> : <LoginForm />}
 				</Col>
 				<Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
 					{children}
