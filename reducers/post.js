@@ -5,6 +5,7 @@ const initialState = {
 			User: {
 				id: 'dudtjr913',
 				nickname: '영석',
+				content: '#해시태그 #오늘 #안에 ##가능#할까? 휴우 힘들다',
 			},
 			Comments: [
 				{ nickname: '영석', comment: '무플방지 내가직접' },

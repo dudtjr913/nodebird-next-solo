@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import PostImages from './PostImages';
 import PropTypes, { number } from 'prop-types';
 import CommentForm from './CommentForm';
+import HashTagForm from './HashTagForm';
 
 const PostCard = ({ post }) => {
 	const { me } = useSelector((state) => state.user);
@@ -58,7 +59,7 @@ const PostCard = ({ post }) => {
 				<Card.Meta
 					avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
 					title={`${post.User.id}의 글`}
-					description="연습중.."
+					description={<HashTagForm content={post.User.content} />}
 				/>
 			</Card>
 			{comment && <CommentForm commentProps={post.Comments} />}
@@ -72,6 +73,7 @@ PostCard.propTypes = {
 		User: PropTypes.shape({
 			id: PropTypes.string,
 			nickname: PropTypes.string,
+			content: PropTypes.string,
 		}),
 		Comments: PropTypes.arrayOf(
 			PropTypes.shape({
