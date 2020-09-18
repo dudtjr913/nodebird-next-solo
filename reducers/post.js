@@ -1,5 +1,5 @@
 const initialState = {
-	post: [
+	mainPosts: [
 		{
 			id: 1,
 			User: {
@@ -46,16 +46,16 @@ const dummyData = {
 
 const ADD_POST = 'ADD_POST';
 
-const addPost = {
+export const addPost = {
 	type: ADD_POST,
 };
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case addPost:
+		case ADD_POST:
 			return {
 				...state,
-				post: [dummyData, ...state.post],
+				mainPosts: [dummyData, ...state.mainPosts],
 			};
 		default:
 			return state;
