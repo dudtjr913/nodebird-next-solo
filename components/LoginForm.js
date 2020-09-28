@@ -4,6 +4,7 @@ import { Form, Input, Button } from 'antd';
 import styled from 'styled-components';
 import { LoginAction } from '../reducers/user';
 import { useDispatch } from 'react-redux';
+import faker from 'faker';
 
 const FormWrapper = styled(Form)`
 	padding: 10px;
@@ -29,7 +30,7 @@ const LoginForm = () => {
 
 	const onSubmitForm = useCallback(() => {
 		console.log(id, password);
-		dispatch(LoginAction({ id, password }));
+		dispatch(LoginAction({ id, password, nickname: faker.name.findName() }));
 	}, [id, password]);
 
 	return (

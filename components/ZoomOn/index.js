@@ -15,10 +15,6 @@ const ZoomOn = ({ images, zoomOff }) => {
 	const [page, setPage] = useState(0);
 	const buttonRef = useRef();
 
-	useEffect(() => {
-		buttonRef.current.focus();
-	}, []);
-
 	const handleOnFocus = useCallback((e) => {
 		buttonRef.current.focus();
 	}, []);
@@ -30,7 +26,7 @@ const ZoomOn = ({ images, zoomOff }) => {
 	}, []);
 
 	return (
-		<AllWrapper onClick={handleOnFocus}>
+		<AllWrapper onMouseOut={handleOnFocus}>
 			<Header>
 				<div>상세 이미지</div>
 				<XButton onKeyDown={handleOnClose} ref={buttonRef} onClick={zoomOff} />

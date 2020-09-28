@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@ant-design/icons": "^4.2.2",
 		"antd": "^4.6.1",
+		"faker": "^5.1.0",
 		"next": "^9.5.2",
 		"next-redux-wrapper": "^6.0.2",
 		"prop-types": "^15.7.2",
@@ -19,6 +20,7 @@
 		"react-redux": "^7.2.1",
 		"react-slick": "^0.27.11",
 		"redux": "^4.0.5",
+		"shortid": "^2.2.15",
 		"styled-components": "^5.1.1"
 	},
 	"devDependencies": {

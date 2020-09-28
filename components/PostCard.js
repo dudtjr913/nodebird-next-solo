@@ -59,10 +59,12 @@ const PostCard = ({ post }) => {
 				<Card.Meta
 					avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
 					title={`${post.User.id}의 글`}
-					description={<HashTagForm content={post.User.content} />}
+					description={
+						post.User.content && <HashTagForm content={post.User.content} />
+					}
 				/>
 			</Card>
-			{comment && <CommentForm commentProps={post.Comments} />}
+			{comment && <CommentForm id={post.id} commentProps={post.Comments} />}
 		</>
 	);
 };

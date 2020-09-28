@@ -1,3 +1,6 @@
+import shortId from 'shortid';
+import faker from 'faker';
+
 const initialState = {
 	mainPosts: [
 		{
@@ -36,16 +39,18 @@ const initialState = {
 	],
 };
 
-const dummyData = {
-	id: 2,
+const dummyData = () => ({
+	id: shortId.generate(),
 	User: {
 		id: 'bak',
 		nickname: '슬기',
 	},
 	Comments: [{ nickname: '영석', comment: '더미데이터' }],
-};
+	Images: [{ src: faker.image.image() }],
+});
 
-const ADD_POST = 'ADD_POST';
+export const ADD_POST = 'ADD_POST';
+export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 
 export const addPost = {
 	type: ADD_POST,
@@ -56,8 +61,20 @@ const reducer = (state = initialState, action) => {
 		case ADD_POST:
 			return {
 				...state,
-				mainPosts: [dummyData, ...state.mainPosts],
+				mainPosts: [dummyData(), ...state.mainPosts],
 			};
+		case ADD_COMMENT_REQUEST: {
+			const mainPost = [...state.mainPosts];
+			const index = mainPost.findIndex((v) => v.id === action.data.id);
+			mainPost[index].Comments = [
+				...mainPost[index].Comments,
+				{ nickname: action.data.nickname, comment: action.data.comment },
+			];
+			return {
+				...state,
+				mainPosts: mainPost,
+			};
+		}
 		default:
 			return state;
 	}

@@ -15,7 +15,7 @@ const PostImages = ({ images }) => {
 			<>
 				<img
 					alt={images[0].src}
-					style={{ maxWidth: '700px' }}
+					style={{ maxWidth: '700px', maxHeight: '200px' }}
 					src={images[0].src}
 					onClick={ZoomOnClick}
 					role="presentation"
@@ -28,14 +28,24 @@ const PostImages = ({ images }) => {
 		return (
 			<>
 				<img
-					style={{ display: 'inline-block', width: '50%' }}
+					style={{
+						display: 'inline-block',
+						width: '50%',
+						maxWidth: '700px',
+						maxHeight: '200px',
+					}}
 					src={images[0].src}
 					alt={images[0].src}
 					onClick={ZoomOnClick}
 					role="presentation"
 				/>
 				<img
-					style={{ display: 'inline-block', width: '50%' }}
+					style={{
+						display: 'inline-block',
+						width: '50%',
+						maxWidth: '700px',
+						maxHeight: '200px',
+					}}
 					src={images[1].src}
 					alt={images[1].src}
 					onClick={ZoomOnClick}
@@ -48,7 +58,12 @@ const PostImages = ({ images }) => {
 	return (
 		<>
 			<img
-				style={{ display: 'inline-block', width: '50%' }}
+				style={{
+					display: 'inline-block',
+					width: '50%',
+					maxWidth: '700px',
+					maxHeight: '200px',
+				}}
 				src={images[0].src}
 				alt={images[0].src}
 				onClick={ZoomOnClick}
@@ -60,6 +75,8 @@ const PostImages = ({ images }) => {
 				style={{
 					display: 'inline-block',
 					width: '50%',
+					maxWidth: '700px',
+					maxHeight: '200px',
 					textAlign: 'center',
 				}}>{`${images.length - 1}개의 사진 더보기`}</div>
 			{zoom && <ZoomOn images={images} zoomOff={ZoomOffClick} />}
